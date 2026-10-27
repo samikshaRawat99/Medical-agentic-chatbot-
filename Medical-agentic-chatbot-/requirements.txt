@@ -1,0 +1,25 @@
+# Web Framework & Server
+fastapi>=0.115,<1
+uvicorn[standard]>=0.30,<1
+python-multipart>=0.0.9
+httpx>=0.27,<1
+
+# Configuration & Utilities
+python-dotenv>=1,<2
+pydantic-settings>=2,<3
+certifi>=2024
+
+# LLM & Agent Framework (Groq & LangGraph)
+groq>=0.11
+langchain-groq>=0.2
+langchain-core>=0.3,<2
+langgraph>=0.3,<2
+langgraph-checkpoint-sqlite>=2.0.0
+
+# Embeddings, Vector Database & Web Search
+fastembed>=0.4
+pinecone>=6,<9
+tavily-python>=0.5,<1
+
+# Document Ingestion (PDF parsing)
+pymupdf>=1.24,<2

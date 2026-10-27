@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>MedGuide AI - Medical Agent & Clinical Assistant</title>
+  <link rel="stylesheet" href="/static/style.css?v=2.4">
+</head>
+<body>
+  <div class="app-layout">
+    <!-- Backdrop overlay for mobile drawer -->
+    <div id="sidebarBackdrop" class="sidebar-backdrop" hidden></div>
+
+    <!-- Sidebar with Recent Chats and New Chat button -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-top">
+        <div class="brand">
+          <div class="brand-badge">✚</div>
+          <div class="brand-info">
+            <h2>MedGuide AI</h2>
+            <p>Clinical Assistant</p>
+          </div>
+          <button id="closeSidebar" class="close-sidebar-btn" type="button" aria-label="Close sidebar">✕</button>
+        </div>
+
+        <button id="newChatBtn" class="new-chat-btn" type="button">
+          <span class="btn-icon">＋</span> Start New Chat
+        </button>
+      </div>
+
+      <div class="sidebar-content">
+        <div class="history-label">
+          <span>Recent Consultations</span>
+          <span id="chatCount" class="badge-count">0</span>
+        </div>
+
+        <div id="chatListContainer" class="chat-list-container">
+          <ul id="chatList" class="chat-list">
+            <!-- Dynamically populated via JS -->
+          </ul>
+          <div id="emptyHistory" class="empty-history">
+            <span class="empty-icon">💬</span>
+            <p>No previous chats</p>
+            <small>Topics and consultations will appear here automatically.</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="footer-status">
+          <span class="status-indicator-dot"></span>
+          <span id="sidebarStatus">Checking connection...</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Chat Workspace -->
+    <main class="chat-main">
+      <header>
+        <div class="header-left">
+          <button id="toggleSidebar" class="icon-toggle-btn" type="button" aria-label="Toggle history menu" title="Toggle chat history">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+          <div class="header-titles">
+            <h1 id="currentChatTitle">✚ MedGuide AI</h1>
+            <p id="chatSubtitle">Medical education • Knowledge base + web research</p>
+          </div>
+        </div>
+        <div class="header-right">
+          <button id="headerNewChat" class="header-new-btn" type="button" title="Start a fresh consultation">
+            ＋ New Chat
+          </button>
+          <span id="status">Checking...</span>
+        </div>
+      </header>
+
+      <div class="notice">
+        <span class="notice-icon">⚠️</span>
+        <span>Educational guidance only. Not a diagnosis. For severe symptoms, contact emergency services immediately.</span>
+      </div>
+
+      <section id="messages" aria-live="polite">
+        <article class="bot welcome-card">
+          <div class="content">
+            <h3>Welcome to MedGuide AI</h3>
+            <p>Ask a medical question, upload a skin or report photo, or use voice input. I verify findings against the Gale Encyclopedia and current medical clinical guidelines.</p>
+            <div class="starter-prompts">
+              <button class="starter-btn" type="button" data-prompt="What are the early warning signs and symptoms of bronchitis?">
+                📋 Early signs of bronchitis
+              </button>
+              <button class="starter-btn" type="button" data-prompt="How to manage asthma attacks and when to seek emergency care?">
+                🫁 Asthma emergency guidelines
+              </button>
+              <button class="starter-btn" type="button" data-prompt="What is the difference between viral and bacterial throat infections?">
+                🩺 Viral vs bacterial infection
+              </button>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <div id="preview" hidden>
+        <img id="thumbnail" alt="Selected image">
+        <button id="remove" type="button">Remove image ×</button>
+      </div>
+
+      <form id="chatForm">
+        <textarea id="message" placeholder="Describe your symptoms or ask a clinical question..." rows="2" required maxlength="4000"></textarea>
+        <div class="toolbar">
+          <label class="action" for="image">📎 Image</label>
+          <input id="image" type="file" accept="image/png,image/jpeg,image/webp" hidden>
+          <button class="action" id="camera" type="button">📷 Camera</button>
+          <button class="action" id="mic" type="button">🎤 Voice</button>
+          <button class="action" id="listen" type="button">🔊 Read answer</button>
+          <button id="send" type="submit">Send ➜</button>
+        </div>
+      </form>
+
+      <details>
+        <summary>API access (optional)</summary>
+        <input id="token" type="password" placeholder="API_TOKEN from .env">
+      </details>
+
+      <video id="video" autoplay playsinline hidden></video>
+      <div id="cameraActions" hidden>
+        <button id="snap" type="button">Capture</button>
+        <button id="closeCamera" type="button">Close camera</button>
+      </div>
+      <canvas id="canvas" hidden></canvas>
+    </main>
+  </div>
+
+  <script src="/static/marked.min.js?v=2.4"></script>
+  <script src="/static/purify.min.js?v=2.4"></script>
+  <script src="/static/app.js?v=2.4"></script>
+</body>
+</html>
